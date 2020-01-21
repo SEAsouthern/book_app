@@ -22,7 +22,7 @@ app.use(express.static('public'));
 
 
 function newSearch(req, res){
-  res.render('index');
+  res.render('pages/index');
 }
 
 
