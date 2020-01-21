@@ -37,7 +37,7 @@ function createSearch(req, res) {
   }
   superagent.get(url)
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
-    .then(results => res.render('pages/show', { searchResults: results }));
+    .then(results => res.render('searches/show', { searchResults: results }));
 }
 
 // superagent.get(url)
@@ -48,9 +48,12 @@ function createSearch(req, res) {
 //   })
 
 function Book(info) {
-  const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
-  this.title = info.title || 'No title avialable';
+  info.imageLinks !== undefined ? this.bookImage = info.imageLinks.thumbnail.replace('http:', 'https:'): this.bookImage = 'https://i.imgur.com/J5LVHEL.jpg';
+  info.title !== undefined ? this.title = info.title : this.title = 'No title avialable';
+  info.authors !== undefined ? this.authors = info.authors.join(', ') : this.authors = 'No authors available';
+  info.description !== undefined ? this.description = info.description : this.description = 'No description available';
 }
+
 // function collectBookData (req, res){
 //   console.log(req.body)
 //   {search: ['harry potter', 'title']}
