@@ -19,11 +19,21 @@ Number and name of feature: Lab 11, Task 1 Initial Setup
 
 Estimate of time needed to complete: 1.5h
 
-Start time: 9:20
+Start time: 9:20am
 
-Finish time: _____
+Finish time: 11am
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1h 40m
+
+Number and name of feature: Lab 11, Task 2 Google Books API
+
+Estimate of time needed to complete: 1h
+
+Start time: 11am
+
+Finish time: 
+
+Actual time needed to complete: 
 
 ## Credits and Collaborations
 Initial setup documents for this lab came from the Code Fellows Repo and the lab instructions.
