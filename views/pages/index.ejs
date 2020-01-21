@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +9,29 @@
   <link rel="stylesheet" type="text/css" href="/styles/reset.css" />
   <link rel="stylesheet" type="text/css" href="/styles/base.css" />
 </head>
+
 <body>
   <header>
     <h2>Hello World</h2>
   </header>
   <main>
-
+    <h4>Search by Title or Author</h4>
+    <form action="/searches" method="post">
+      <input type="text" name="search" placeholder="Enter a title or Author" required>
+      <fieldset>
+        <label for="title">
+          <span>Title</span>
+          <input type="radio" name="search" value="title" required>
+        </label>
+      </fieldset>
+      <fieldset>
+        <label for="author">
+          <input type="radio" name="search" value="author" required>
+        </label>
+      </fieldset>
+      <button type="submit">Searchthe Google Books API</button>
+    </form>
   </main>
-  <footer>
-
-  </footer>
 </body>
+
 </html>
