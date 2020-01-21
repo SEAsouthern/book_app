@@ -31,6 +31,16 @@ Estimate of time needed to complete: 1h
 
 Start time: 11am
 
+Finish time: 1157
+
+Actual time needed to complete: 57min
+
+Number and name of feature: Lab 11, Task 3 Display Search Results
+
+Estimate of time needed to complete: 2h
+
+Start time: 1200
+
 Finish time: 
 
 Actual time needed to complete: 
