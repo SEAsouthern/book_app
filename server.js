@@ -19,10 +19,7 @@ app.use(express.static('public'));
 app.post('/searches', createSearch)
 app.get('*', (req, res) => res.status(404).send('This route does not exist'));
 
-function Book(info) {
-  const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
-  this.title = info.title || 'No title avialable';
-}
+
 
 function newSearch(req, res) {
   res.render('pages/index');
@@ -33,14 +30,37 @@ function createSearch(req, res) {
   console.log(req.body);
   console.log(req.body.search);
   if (req.body.search[1] === 'title') {
-    url += `+intitle:${req.body.search[0]}`;}
+    url += `+intitle:${req.body.search[0]}`;
+  }
   if (req.body.search[1] === 'author') {
-    url += `+inauthor:${req.body.search[0]}`;}
+    url += `+inauthor:${req.body.search[0]}`;
+  }
   superagent.get(url)
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
     .then(results => res.render('pages/show', { searchResults: results }));
 }
 
+superagent.get(url)
+  .then(agentResults => {
+    let bookArray = agentResults.body.items;
+    const betterBookArray = bookArray.map(book => new Book(book.volumeInfo))
+    Response.send(betterBookArray);
+  })
+
+function Book(info) {
+  const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
+  this.title = info.title || 'No title avialable';
+}
+// function collectBookData (req, res){
+//   console.log(req.body)
+//   {search: ['harry potter', 'title']}
+//   let searchWord = req.body.search[0];
+//   let searchType = req.body.search[1];
+//   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
+//   if( searchType === 'title'){
+//     url +=
+//   }
+// }
 
 
 
