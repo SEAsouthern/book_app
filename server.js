@@ -40,12 +40,12 @@ function createSearch(req, res) {
     .then(results => res.render('pages/show', { searchResults: results }));
 }
 
-superagent.get(url)
-  .then(agentResults => {
-    let bookArray = agentResults.body.items;
-    const betterBookArray = bookArray.map(book => new Book(book.volumeInfo))
-    Response.send(betterBookArray);
-  })
+// superagent.get(url)
+//   .then(agentResults => {
+//     let bookArray = agentResults.body.items;
+//     const betterBookArray = bookArray.map(book => new Book(book.volumeInfo))
+//     Response.send(betterBookArray);
+//   })
 
 function Book(info) {
   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
