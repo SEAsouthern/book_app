@@ -12,6 +12,20 @@ client.on('error', err => console.error(err));
 // const superagent = require('superagent');
 
 app.use(cors());
+app.get('/', newSearch);
+app.set('view engine', 'ejs');
+// app.use(express.urlencoded());
+app.use(express.static('public'));
+// app.post('/searches', createSearch)
+
+
+
+
+function newSearch(req, res){
+  res.render('index');
+}
+
+
 
 
 
