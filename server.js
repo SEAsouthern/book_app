@@ -14,10 +14,11 @@ client.on('error', err => console.error(err));
 app.use(cors());
 app.get('/', newSearch);
 app.set('view engine', 'ejs');
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.post('/searches', createSearch)
 app.get('*', (req, res) => res.status(404).send('This route does not exist'));
+app.use(errorHandler);
 
 
 
@@ -37,7 +38,11 @@ function createSearch(req, res) {
   }
   superagent.get(url)
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
-    .then(results => res.render('searches/show', { searchResults: results }));
+    .then(results => res.render('searches/show', { searchResults: results 
+    }))
+    .catch(() => {
+      errorHandler('You done messed up A A Ron', req res);
+    })
 }
 
 // superagent.get(url)
@@ -65,6 +70,13 @@ function Book(info) {
 //   }
 // }
 
+function notFoundHandler(req, res) {
+  res.status(404).send('clever girl');
+}
 
+function errorHandler(error, req, res) {
+  console.log('no soup for you', error);
+  res.status(500).send(error);
+}
 
 app.listen(PORT, () => console.log(`Your server is listening on ${PORT}`));
