@@ -21,6 +21,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.post('/searches', createSearch)
 app.get('*', (req, res) => res.status(404).send('This route does not exist'));
+app.get('')
 app.use(errorHandler);
 
 function showForm(req, res) {
@@ -28,7 +29,7 @@ function showForm(req, res) {
 }
 
 function getBooks(req, res) {
-  let SQL = 'SELECT * from saved-books;';
+  let SQL = 'SELECT * from saved_books;';
 
   return client.query(SQL)
     .then(results => res.render('index', {results: results.rows}))
@@ -38,7 +39,7 @@ function getBooks(req, res) {
 function getOneBook(req, res) {
   getBooks()
     .then(shelves => {
-      let SQL = 'SELECT * FROM saved-books WHERE id=$1;';
+      let SQL = 'SELECT * FROM saved_books WHERE id=$1;';
       let values = [req.params.id];
       return client.query(SQL, values)
         .then(res => {
@@ -90,7 +91,7 @@ function addBook(req, res) {
   console.log(req.body)
   let { title, authors, description, imageURL } = req.body;
 
-  let SQL = 'INSERT INTO saved-books(title, authors, description, imageURL) VALUES ($1, $2, $3, $4);';
+  let SQL = 'INSERT INTO saved_books(title, authors, description, imageURL) VALUES ($1, $2, $3, $4);';
   let values = [title, authors, description, imageURL];
 
   return client.query(SQL, values)
