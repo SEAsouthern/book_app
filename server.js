@@ -13,12 +13,19 @@ client.on('error', err => console.error(err));
 
 app.use(cors());
 app.get('/', newSearch);
+app.get('/books/:id', getOneBook);
+app.get('/add', showForm);
+app.post('/add', addBook)
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.post('/searches', createSearch)
 app.get('*', (req, res) => res.status(404).send('This route does not exist'));
 app.use(errorHandler);
+
+function showForm(req, res) {
+  res.render('pages/index');
+}
 
 function getBooks(req, res) {
   let SQL = 'SELECT * from saved-books;';
@@ -29,14 +36,17 @@ function getBooks(req, res) {
 }
 
 function getOneBook(req, res) {
-  let SQL = 'SELECT * FROM saved-books WHERE id=$1;';
-  let values = [req.params.saved-book_id];
-
-  return client.query(SQL, values)
-    .then(res => {
-      return.res.render('searches/show', { saved-book: res.rows[0] });
+  getBooks()
+    .then(shelves => {
+      let SQL = 'SELECT * FROM saved-books WHERE id=$1;';
+      let values = [req.params.id];
+      return client.query(SQL, values)
+        .then(res => {
+          res.render('pages/books/show', { book: res.rows[0], bookshelves: shelves.rows });
+        })
+        .catch(err => errorHandler(err, res));
     })
-    .catch (err => errorHandler(err, res));
+
 }
 
 function newSearch(req, res) {
@@ -79,7 +89,7 @@ function Book(info) {
 function addBook(req, res) {
   console.log(req.body)
   let { title, authors, description, imageURL } = req.body;
-  
+
   let SQL = 'INSERT INTO saved-books(title, authors, description, imageURL) VALUES ($1, $2, $3, $4);';
   let values = [title, authors, description, imageURL];
 
