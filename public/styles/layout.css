@@ -1,0 +1,77 @@
+body {
+  text-align: center;
+}
+
+header{
+  display: flex;
+  justify-content: space-evenly;
+  background-color: black;
+
+}
+
+h4{
+  display: flex;
+  align-content: center;
+  background-color: grey;
+}
+
+.inputButton {
+  font: black;
+}
+fieldset {
+  display: flex;
+  border: black;
+  box-sizing: content-box;
+
+  
+}
+
+header {
+  border: 3px grey;
+  padding: 25px;
+  background-size: auto;
+  display: flex;
+  align-items: center;
+} 
+/* h2 {
+  height: 100px;
+  text-align: center;
+  font-size: 200px;
+}
+/* main{
+  text-align: center;
+  display: flex;
+  display: flexbox;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 960px;
+  min-width: 300px;
+
+} */
+
+/* .containerMain{
+  align-content: center;
+}
+
+form{
+  align-content: center;
+  text-align: center;
+}
+.container{
+  align-content: center;
+  text-align: center;
+  justify-content: space-evenly;
+  /* //https://unsplash.com/photos/sfL_QOnmy00 */
+  /* background: url('../img/books.jpg') no-repeat center/cover;
+  width: 960;
+  height:800;
+  min-width: 350;
+  min-width: 800;
+}
+
+
+button{
+color: rgba(134, 109, 24, 0.596);
+}
+
+
