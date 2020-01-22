@@ -25,6 +25,7 @@ Finish time: 11am
 
 Actual time needed to complete: 1h 40m
 
+
 Number and name of feature: Lab 11, Task 2 Google Books API
 
 Estimate of time needed to complete: 1h
@@ -35,15 +36,38 @@ Finish time: 1157
 
 Actual time needed to complete: 57min
 
+
 Number and name of feature: Lab 11, Task 3 Display Search Results
 
 Estimate of time needed to complete: 2h
 
-Start time: 1200
+Start time: 1200pm 21 Jan 20
 
-Finish time: 
+Finish time: 9am 22 Jan 21
 
-Actual time needed to complete: 
+Actual time needed to complete: 1h
+
+
+Number and name of feature: Lab 11, Task 4 Errors
+
+Estimate of time needed to complete: 30m
+
+Start time: 9am 22 Jan 20
+
+Finish time: 9:20am 22 Jan 21
+
+Actual time needed to complete: 20m
+
+
+Number and name of feature: Lab 11, Task 5 CSS
+
+Estimate of time needed to complete: 1h
+
+Start time: 9:30am 22 Jan 20
+
+Finish time: 9:20am 22 Jan 21
+
+Actual time needed to complete: 20m
 
 ## Credits and Collaborations
 Initial setup documents for this lab came from the Code Fellows Repo and the lab instructions.
