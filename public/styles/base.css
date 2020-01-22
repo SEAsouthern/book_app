@@ -1,4 +1,6 @@
 body {
-  background-color: blue;
-  color: orange
+  
+  align-items: center;
+  background-color: rgb(46, 46, 63);
+  color:lightgoldenrodyellow
 }

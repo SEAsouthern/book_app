@@ -6,18 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Book App</title>
+  <link rel="stylesheet" type="text/css" href="/styles/layout.css" />
   <link rel="stylesheet" type="text/css" href="/styles/reset.css" />
   <link rel="stylesheet" type="text/css" href="/styles/base.css" />
 </head>
 
-<body>
+<body class="container">
   <header>
-    <h2>Hello World</h2>
+    <h2>Best Books!</h2>
   </header>
   <main>
-    <h4>Search by Title or Author</h4>
-    <form action="/searches" method="post">
-      <input type="text" name="search" placeholder="Enter a title or Author" required>
+    <form action="/searches" method="post"></form>
+      <h4>Search by Title or Author</h4>
+      <input class="inputButton" type="text" name="search" placeholder="Enter a title or Author" required>
       <fieldset>
         <label for="title">
           <span>Title</span>
@@ -30,9 +31,9 @@
           <input type="radio" name="search" value="author" required>
         </label>
       </fieldset>
-      <button type="submit">Searchthe Google Books API</button>
+      <button type="submit">Search Google Books</button>
     </form>
-  </main>
+  </main
 </body>
 
 </html>

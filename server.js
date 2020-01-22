@@ -41,7 +41,7 @@ function createSearch(req, res) {
     .then(results => res.render('searches/show', { searchResults: results 
     }))
     .catch(() => {
-      errorHandler('You done messed up A A Ron', req res);
+      errorHandler('You done messed up A A Ron', req, res);
     })
 }
 
