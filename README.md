@@ -69,6 +69,17 @@ Finish time: 9:20am 22 Jan 21
 
 Actual time needed to complete: 20m
 
+
+Number and name of feature: Lab 12, Task 1 Setup DB
+
+Estimate of time needed to complete: 3h
+
+Start time: 9:30am 22 Jan 20
+
+Finish time: 9:20am 22 Jan 21
+
+Actual time needed to complete: 20m
+
 ## Credits and Collaborations
 Initial setup documents for this lab came from the Code Fellows Repo and the lab instructions.
 

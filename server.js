@@ -20,7 +20,24 @@ app.post('/searches', createSearch)
 app.get('*', (req, res) => res.status(404).send('This route does not exist'));
 app.use(errorHandler);
 
+function getBooks(req, res) {
+  let SQL = 'SELECT * from saved-books;';
 
+  return client.query(SQL)
+    .then(results => res.render('index', {results: results.rows}))
+    .catch(errorHandler);
+}
+
+function getOneBook(req, res) {
+  let SQL = 'SELECT * FROM saved-books WHERE id=$1;';
+  let values = [req.params.saved-book_id];
+
+  return client.query(SQL, values)
+    .then(res => {
+      return.res.render('searches/show', { saved-book: res.rows[0] });
+    })
+    .catch (err => errorHandler(err, res));
+}
 
 function newSearch(req, res) {
   res.render('pages/index');
@@ -38,10 +55,10 @@ function createSearch(req, res) {
   }
   superagent.get(url)
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
-    .then(results => res.render('searches/show', { searchResults: results 
+    .then(results => res.render('searches/show', { searchResults: results
     }))
     .catch(() => {
-      errorHandler('You done messed up A A Ron', req res);
+      errorHandler('You done messed up A A Ron', req, res);
     })
 }
 
@@ -59,6 +76,18 @@ function Book(info) {
   info.description !== undefined ? this.description = info.description : this.description = 'No description available';
 }
 
+function addBook(req, res) {
+  console.log(req.body)
+  let { title, authors, description, imageURL } = req.body;
+  
+  let SQL = 'INSERT INTO saved-books(title, authors, description, imageURL) VALUES ($1, $2, $3, $4);';
+  let values = [title, authors, description, imageURL];
+
+  return client.query(SQL, values)
+    .then(res.redirect('/'))
+    .catch(err => errorHandler(err, res));
+}
+
 // function collectBookData (req, res){
 //   console.log(req.body)
 //   {search: ['harry potter', 'title']}
@@ -70,9 +99,9 @@ function Book(info) {
 //   }
 // }
 
-function notFoundHandler(req, res) {
-  res.status(404).send('clever girl');
-}
+// function notFoundHandler(req, res) {
+//   res.status(404).send('clever girl');
+// }
 
 function errorHandler(error, req, res) {
   console.log('no soup for you', error);
