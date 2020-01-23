@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Show</title>
 </head>
+
 <body>
   <ul>
-  <% searchResults.forEach(data => { %>
+    <% searchResults.forEach(data => { %>
     <li><%= data.title %></li>
     <li><%= data.authors %></li>
     <li><%= data.description %></li>
     <img src='<%= data.bookImage %>' alt='<%= data.title %>'>
-  <% }) %>
+    <form action="/books" method="post">
+      <input type="hidden" name="title" value="<%- data.title %>">
+      <input type="hidden" name="authors" value="<%- data.authors %>">
+      <input type="hidden" name="isbn" value="<%- data.isbn %>">
+      <input type="hidden" name="description" value="<%- data.description %>">
+      <input type="hidden" name="bookImage" value="<%- data.bookImage %>">
+      <!-- <input type="hidden" name="bookShelf" value="<%- data.bookShelf %>"> -->
+      <button type="submit">Add to Shelf</button>
+    </form>
+    <% }) %>
   </ul>
 </body>
+
 </html>

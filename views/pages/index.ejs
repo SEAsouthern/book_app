@@ -13,26 +13,20 @@
 
 <body class="container">
   <header>
-    <h2>Best Books!</h2>
+    <h2>Book Shelf</h2>
   </header>
   <main>
-    <form action="/searches/new" method="post">
-      <h4>Search by Title or Author</h4>
-      <input class="inputButton" type="text" name="search" placeholder="Enter a title or Author" required>
-      <fieldset>
-        <label for="title">
-          <span>Title</span>
-          <input type="radio" name="search" value="title" required>
-        </label>
-      </fieldset>
-      <fieldset>
-        <label for="author">
-          <span>Author</span>
-          <input type="radio" name="search" value="author" required>
-        </label>
-      </fieldset>
-      <button type="submit">Search Google Books</button>
-    </form>
+    <ul>
+      <% results.forEach(data => { %>
+      <li><%= data.title %></li>
+      <li><%= data.authors %></li>
+      <li><%= data.description %></li>
+      <li>book image <%= data.bookImage %></li>
+      <img src='<%= data.bookImage %>' alt='<%= data.title %>'>
+      <% }) %>
+    </ul>
+ 
+
   </main>
 </body>
 

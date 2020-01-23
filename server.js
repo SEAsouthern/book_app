@@ -12,16 +12,19 @@ const client = new pg.Client(process.env.DATABASE_URL);
 client.on('error', err => console.error(err));
 
 app.use(cors());
-app.get('/', newSearch);
+app.get('/', getBooks)
+app.get('/searches', newSearch);
 app.get('/books/:id', getOneBook);
-app.get('/add', showForm);
-app.post('/add', addBook)
+// app.get('/add', showForm);
+// app.post('/add', addBook)
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
-app.post('/searches/new', createSearch)
+app.post('/searches/new', createSearch);
+app.post('/books', addBook);
 app.get('*', (req, res) => res.status(404).send('This route does not exist'));
 app.get('')
+
 app.use(errorHandler);
 
 function showForm(req, res) {
@@ -29,10 +32,14 @@ function showForm(req, res) {
 }
 
 function getBooks(req, res) {
+  console.log('what')
   let SQL = 'SELECT * from saved_books;';
-
   return client.query(SQL)
-    .then(results => res.render('index', {results: results.rows}))
+    .then(results => {
+      console.log('get books results', results.rows);
+      res.render('pages/index', {results: results.rows})
+    })
+    
     .catch(errorHandler);
 }
 
@@ -51,13 +58,14 @@ function getOneBook(req, res) {
 }
 
 function newSearch(req, res) {
-  res.render('pages/index');
+  res.render('pages/searches/new');
+
 }
 
 function createSearch(req, res) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
-  console.log(req.body);
-  console.log(req.body.search);
+  // console.log(req.body);
+  // console.log(req.body.search);
   if (req.body.search[1] === 'title') {
     url += `+intitle:${req.body.search[0]}`;
   }
@@ -66,7 +74,7 @@ function createSearch(req, res) {
   }
   superagent.get(url)
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
-    .then(results => res.render('searches/show', { searchResults: results
+    .then(results => res.render('pages/searches/show', { searchResults: results
     }))
     .catch(() => {
       errorHandler('You done messed up A A Ron', req, res);
@@ -84,15 +92,16 @@ function Book(info) {
   info.imageLinks !== undefined ? this.bookImage = info.imageLinks.thumbnail.replace('http:', 'https:'): this.bookImage = 'https://i.imgur.com/J5LVHEL.jpg';
   info.title !== undefined ? this.title = info.title : this.title = 'No title avialable';
   info.authors !== undefined ? this.authors = info.authors.join(', ') : this.authors = 'No authors available';
+  info.isbn !== undefined ? this.isbn = info.isbn : this.isbn = 'No ISBN avialable'
   info.description !== undefined ? this.description = info.description : this.description = 'No description available';
 }
 
 function addBook(req, res) {
-  console.log(req.body)
-  let { title, authors, description, imageURL } = req.body;
+  //console.log(req.body)
+  let { title, authors, isbn, description, bookImage } = req.body;
 
-  let SQL = 'INSERT INTO saved_books(title, authors, description, imageURL) VALUES ($1, $2, $3, $4);';
-  let values = [title, authors, description, imageURL];
+  let SQL = 'INSERT INTO saved_books(title, authors, isbn, description, bookImage) VALUES ($1, $2, $3, $4, $5);';
+  let values = [title, authors, isbn, description, bookImage];
 
   return client.query(SQL, values)
     .then(res.redirect('/'))
