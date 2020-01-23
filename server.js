@@ -19,7 +19,7 @@ app.post('/add', addBook)
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
-app.post('/searches', createSearch)
+app.post('/searches/new', createSearch)
 app.get('*', (req, res) => res.status(404).send('This route does not exist'));
 app.get('')
 app.use(errorHandler);
@@ -119,4 +119,7 @@ function errorHandler(error, req, res) {
   res.status(500).send(error);
 }
 
-app.listen(PORT, () => console.log(`Your server is listening on ${PORT}`));
+client.connect()
+  .then(() => {
+    app.listen(PORT, () => console.log(`Your server is listening on ${PORT}`));
+  });
