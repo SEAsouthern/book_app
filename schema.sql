@@ -2,14 +2,14 @@ DROP TABLE IF EXISTS saved_books;
 CREATE TABLE saved_books (
   id SERIAL PRIMARY KEY,
   title VARCHAR(255),
-  author VARCHAR(255),
+  authors VARCHAR(255),
   isbn VARCHAR(255),
   description TEXT,
-  imageURL VARCHAR(255),
+  bookImage VARCHAR(255),
   bookShelf VARCHAR(255)
 );
 
-INSERT INTO saved_books (title, author, isbn, description, imageURL, bookShelf)VALUES(
+INSERT INTO saved_books (title, authors, isbn, description, bookImage, bookShelf)VALUES(
   'The Time Machine',
   'H. G. Wells',
   'isbn_13 9780441013593',
